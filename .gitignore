@@ -35,6 +35,7 @@ manifest.yml
 out
 overridedb.*
 target
+data
 .flattened-pom.xml
 secrets.yml
 .gradletasknamecache
