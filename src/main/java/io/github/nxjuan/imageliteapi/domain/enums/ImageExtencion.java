@@ -1,5 +1,6 @@
 package io.github.nxjuan.imageliteapi.domain.enums;
 
+import lombok.Getter;
 import org.springframework.http.MediaType;
 
 import java.util.Arrays;
@@ -9,6 +10,7 @@ public enum ImageExtencion {
     GIF(MediaType.IMAGE_GIF),
     JPEG(MediaType.IMAGE_JPEG);
 
+    @Getter
     private MediaType mediaType;
 
     ImageExtencion(MediaType mediaType){
