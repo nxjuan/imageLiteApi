@@ -33,12 +33,14 @@ public class Image {
     @Enumerated(EnumType.STRING)
     private ImageExtencion extension;
 
+    @Column
     @CreatedDate
     private LocalDateTime uploadDate;
 
     @Column
     private String tags;
 
+    @Column
     @Lob
     private byte[] file;
 
