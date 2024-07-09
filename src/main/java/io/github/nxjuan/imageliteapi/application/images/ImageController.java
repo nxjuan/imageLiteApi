@@ -57,11 +57,11 @@ public class ImageController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ImageDTO>> searc(
-        @RequestParam(value = "extension", required = false) String extension,
+    public ResponseEntity<List<ImageDTO>> search(
+        @RequestParam(value = "extension", required = false, defaultValue = "") String extension,
         @RequestParam(value = "query", required = false) String query)
     {
-        var result = service.search(ImageExtencion.valueOf(extension), query);
+        var result = service.search(ImageExtencion.ofName(extension), query);
         var images = result.stream().map(
                 image -> {
                     var url = buildImageURL(image);
@@ -74,7 +74,7 @@ public class ImageController {
     private URI buildImageURL(Image image){
         String imagePath = "/" + image.getId();
         return ServletUriComponentsBuilder
-                .fromCurrentRequest()
+                .fromCurrentRequestUri()
                 .path(imagePath)
                 .build()
                 .toUri();
