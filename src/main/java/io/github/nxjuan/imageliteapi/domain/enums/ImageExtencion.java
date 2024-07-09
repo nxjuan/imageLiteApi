@@ -19,8 +19,8 @@ public enum ImageExtencion {
 
     public static ImageExtencion valueOf(MediaType mediaType){
         return Arrays.stream(values())
-                .filter(ie -> ie.mediaType.equals(mediaType))
-                .findFirst()
-                .orElse(null);
+            .filter(ie -> ie.mediaType.equals(mediaType))
+            .findFirst()
+            .orElse(null);
     }
 }

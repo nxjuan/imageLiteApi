@@ -1,6 +1,7 @@
 package io.github.nxjuan.imageliteapi.application.images;
 
 import io.github.nxjuan.imageliteapi.domain.entities.Image;
+import io.github.nxjuan.imageliteapi.domain.enums.ImageExtencion;
 import io.github.nxjuan.imageliteapi.domain.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/images")
@@ -52,6 +54,21 @@ public class ImageController {
         headers.setContentDispositionFormData("inline; filename=\"" + image.getFileName() + "\"", image.getFileName());
 
         return new ResponseEntity<>(image.getFile(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ImageDTO>> searc(
+        @RequestParam(value = "extension", required = false) String extension,
+        @RequestParam(value = "query", required = false) String query)
+    {
+        var result = service.search(ImageExtencion.valueOf(extension), query);
+        var images = result.stream().map(
+                image -> {
+                    var url = buildImageURL(image);
+                    return mapper.imageToDTO(image, url.toString());
+                }
+        ).collect(Collectors.toList());
+        return ResponseEntity.ok(images);
     }
 
     private URI buildImageURL(Image image){
