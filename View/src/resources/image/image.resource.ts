@@ -1,4 +1,5 @@
-export class image {
+
+export class Image {
     url?: string;
     name?: string;
     extension?: string;
