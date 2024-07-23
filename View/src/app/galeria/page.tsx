@@ -11,7 +11,7 @@ export default function GaleriaPage(){
     const useService = useImageService();
     const [images, setImages] = useState<Image[]>([]);
 
-    async function searchImage(){
+    async function searchImages(){
         const result = await useService.buscar()
         setImages(result);
         console.table(images)
@@ -29,8 +29,20 @@ export default function GaleriaPage(){
 
     return (
         <Template>
-            
-            <button onClick={searchImage} className='bg-gray-500'>Clique para alterar o botão</button>            
+            <section className='flex flex-col items-center justfy-center my-5'>
+                <div className='flex space-x-4'>
+                    <input type="text" className='border bg-gray-200 px-3 py-2 rounded-md text-black' placeholder='search'/>
+
+                    <select name="" id="" className='border bg-gray-200 px-4 py-2 rounded-md text-black'>
+                        <option>All Formats</option>
+                    </select>
+
+                    <button className='bg-blue-500 text-white px-4 py-2 rounded-lg' onClick={searchImages}>Search</button>
+                    <button className='bg-blue-700 text-white px-4 py-2 rounded-lg'>Add New</button>
+                </div>
+            </section>
+
+            <button onClick={searchImages} className='bg-gray-500'>Clique para alterar o botão</button>            
             <section className='grid grid-cols-4 gap-8'>
                 {
                     renderImageCards()
