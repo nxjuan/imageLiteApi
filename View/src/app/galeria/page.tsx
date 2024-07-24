@@ -12,11 +12,13 @@ export default function GaleriaPage(){
     const [images, setImages] = useState<Image[]>([]);
     const [query, setQuery] = useState<string>('')
     const [extension, setExtension] = useState<string>('')
+    const [loading, setLoading] = useState<boolean>(false)
 
     async function searchImages(){
-        console.log("valor digitado ", query)
+        setLoading(true)
         const result = await useService.buscar(query, extension)
         setImages(result);
+        setLoading(false)
     }
 
     function renderImageCard(image: Image){
@@ -49,8 +51,8 @@ export default function GaleriaPage(){
                         <option value="GIF">Gif</option>
                     </select>
 
-                    <button className='bg-blue-500 text-white px-4 py-2 rounded-lg' onClick={searchImages}>Search</button>
-                    <button className='bg-blue-700 text-white px-4 py-2 rounded-lg'>Add New</button>
+                    <button className='bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-900' onClick={searchImages}>Search</button>
+                    <button className='bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-900'>Add New</button>
                 </div>
             </section>
     
