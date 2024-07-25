@@ -1,6 +1,6 @@
 'use client'
 
-import { Template, ImageCard } from '@/components/'
+import { Template, ImageCard, Button } from '@/components/'
 import { use, useState } from 'react'
 import { useImageService } from '@/resources/image/image.service'
 import { Image } from '@/resources/image/image.resource';
@@ -52,9 +52,10 @@ export default function GaleriaPage(){
                         <option value="GIF">Gif</option>
                     </select>
 
-                    <button className='bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-900' onClick={searchImages}>Search</button>
+                    <Button style="bg-blue-500 hover:bg-blue-900" label='Search' onclick={searchImages}/>
+                    
                     <Link href="/formulario">
-                        <button className='bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-900'>Add New</button>
+                        <Button style='bg-blue-700 hover:bg-blue-900' label='Add New'/>
                     </Link>
                     
                 </div>
