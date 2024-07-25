@@ -4,6 +4,7 @@ import { Template, ImageCard } from '@/components/'
 import { use, useState } from 'react'
 import { useImageService } from '@/resources/image/image.service'
 import { Image } from '@/resources/image/image.resource';
+import Link from 'next/link';
 
 
 export default function GaleriaPage(){
@@ -52,7 +53,10 @@ export default function GaleriaPage(){
                     </select>
 
                     <button className='bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-900' onClick={searchImages}>Search</button>
-                    <button className='bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-900'>Add New</button>
+                    <Link href="/formulario">
+                        <button className='bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-900'>Add New</button>
+                    </Link>
+                    
                 </div>
             </section>
     

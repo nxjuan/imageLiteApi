@@ -5,7 +5,7 @@ interface TempleteProps {
     loading?: boolean;
 }
 
-export const Template: React.FC<TempleteProps> = ({ children, loading }: TempleteProps) => {
+export const Template: React.FC<TempleteProps> = ({ children, loading = false }: TempleteProps) => {
     return (
         <>
             <Header />
