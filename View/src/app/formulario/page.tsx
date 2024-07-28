@@ -1,20 +1,39 @@
+'use client'
+
 import { InputText, Template, Button } from '@/components'
 import Link from 'next/link'
+import { useFormik } from 'formik'
+
+interface FormProps{
+    name: string;
+    tags: string;
+    file: any;
+}
+
+const formScheme: FormProps = {name: '', tags: '', file: ''}
 
 export default function Formulario(){
+
+    const formik = useFormik<FormProps>({
+        initialValues: formScheme,
+        onSubmit: (dados: FormProps) => {
+            console.log(dados)
+        }
+    })
+
     return (
         <Template>
             <section className='flex flex-col items-center justfy-center my-5'>
                 <h5 className='mt-3 mb-10 text-3xl font-extrabold tracking-tight text-translate-900 text-gray-700'>Nova Imagem</h5>
-                <form action="">
+                <form onSubmit={formik.handleSubmit}>
                     <div className='grid grid-cols-1'>
                         <label className='block text-sm font-medium leading-6 text-gray-600'>Name: *</label>
-                        <InputText placeHolder="type the image's name"/>
+                        <InputText id="name" onChange={formik.handleChange} placeholder="type the image's name"/>
                     </div>
 
                     <div className='mt-5 grid grid-cols-1'>
                         <label className='block text-sm font-medium leading-6 text-gray-600'>Tags: *</label>
-                        <InputText placeHolder="type the tags comma separated"/>
+                        <InputText id='tegs' onChange={formik.handleChange} placeholder="type the tags comma separated"/>
                     </div>
 
                     <div className='mt-5 grid grid-cols-1'>
@@ -38,7 +57,7 @@ export default function Formulario(){
                     <div className='mt-6 flex items-center justify-end gap-x-6'>
                         <Button style='bg-blue-600 hover:bg-blue-900' label='save' type='submit' />
                         <Link href='/galeria'>
-                            <Button style='bg-white border border-red-500 hover:bg-red-500 text-gray-600 hover:text-white' label='cancel' type='button' />
+                            <Button style='bg-white text-gray-900 border border-red-500 hover:bg-red-500 hover:text-white' label='cancel' type='button' />
                         </Link>
                     </div>
                 </form>

@@ -43,7 +43,7 @@ export default function GaleriaPage(){
         <Template>
             <section className='flex flex-col items-center justfy-center my-5'>
                 <div className='flex space-x-4'>
-                    <InputText onChange={event => setQuery(event.target.value)} placeHolder='Digitar'/>
+                    <InputText onChange={event => setQuery(event.target.value)} placeholder='Digitar'/>
 
                     <select onChange={event => setExtension(event.target.value)} name="" id="" className='border bg-gray-200 px-4 py-2 rounded-md text-black'>
                         <option value="">All Formats</option>
