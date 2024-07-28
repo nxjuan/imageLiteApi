@@ -1,4 +1,5 @@
-import { InputText, Template } from '@/components'
+import { InputText, Template, Button } from '@/components'
+import Link from 'next/link'
 
 export default function Formulario(){
     return (
@@ -33,6 +34,12 @@ export default function Formulario(){
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div className='mt-6 flex items-center justify-end gap-x-6'>
+                        <Button style='bg-blue-600 hover:bg-blue-900' label='save' />
+                        <Link href='/galeria'>
+                            <Button style='bg-white border border-red-500 hover:bg-red-500 text-gray-600 hover:text-white' label='cancel' />
+                        </Link>
                     </div>
                 </form>
             </section>            
