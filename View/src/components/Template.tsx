@@ -1,4 +1,5 @@
 import { Children } from "react";
+import {  ToastContainer } from "react-toastify"
 
 interface TempleteProps {
     children: React.ReactNode;
@@ -9,7 +10,7 @@ export const Template: React.FC<TempleteProps> = ({ children, loading = false }:
     return (
         <>
             <Header />
-                <div className={`${loading ? 'animate-pulse' : ''} container mx-auto mt-8 px-4 `}>
+                <div className={`${loading ? 'animate-pulse' : ''} container mx-auto mt-8 px-4`}>
 
                     <RenderIf condition={loading}>
                         <div className="flex items-center justify-center">
@@ -21,6 +22,7 @@ export const Template: React.FC<TempleteProps> = ({ children, loading = false }:
 
                 </div>
             <Footer />
+            <ToastContainer position="top-right" autoClose={6000} hideProgressBar={true} draggable={false} closeOnClick={true} pauseOnHover={true} />
         </>
     )
 }
