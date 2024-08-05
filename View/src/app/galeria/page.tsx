@@ -1,6 +1,6 @@
 'use client'
 
-import { Template, ImageCard, Button, InputText } from '@/components/'
+import { Template, ImageCard, Button, InputText, useNotification } from '@/components/'
 import { use, useState } from 'react'
 import { useImageService } from '@/resources/image/image.service'
 import { Image } from '@/resources/image/image.resource';
@@ -10,6 +10,7 @@ import Link from 'next/link';
 export default function GaleriaPage(){
 
     const useService = useImageService();
+    const notification = useNotification();
     const [images, setImages] = useState<Image[]>([]);
     const [query, setQuery] = useState<string>('')
     const [extension, setExtension] = useState<string>('')
@@ -20,6 +21,10 @@ export default function GaleriaPage(){
         const result = await useService.buscar(query, extension)
         setImages(result);
         setLoading(false)
+
+        if(!result.length){
+            notification.notify("No result found", 'warning')
+        }
     }
 
     function renderImageCard(image: Image){
@@ -40,7 +45,7 @@ export default function GaleriaPage(){
     }
 
     return (
-        <Template>
+        <Template loading={loading}>
             <section className='flex flex-col items-center justfy-center my-5'>
                 <div className='flex space-x-4'>
                     <InputText onChange={event => setQuery(event.target.value)} placeholder='Digitar'/>

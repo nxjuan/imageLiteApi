@@ -1,6 +1,6 @@
 'use client'
 
-import { InputText, Template, Button, RenderIf } from '@/components'
+import { InputText, Template, Button, RenderIf, useNotification } from '@/components'
 import Link from 'next/link'
 import { useFormik } from 'formik'
 import { useState } from 'react';
@@ -19,6 +19,7 @@ export default function Formulario(){
     const [loading, setloading] = useState<boolean>(false);
     const [imagePreview, setImagePreview] = useState<string>();
     const service = useImageService();
+    const notification = useNotification();
 
     const formik = useFormik<FormProps>({
         initialValues: formScheme,
@@ -37,6 +38,8 @@ export default function Formulario(){
         formik.resetForm();
         setImagePreview('');
         setloading(false);
+        
+        notification.notify('Upload sent succesfully', 'success')
     }
 
     function onFIleUpload(event: React.ChangeEvent<HTMLInputElement>){
@@ -93,12 +96,11 @@ export default function Formulario(){
                     <div className='mt-6 flex items-center justify-end gap-x-6'>
                         <Button style='bg-blue-600 hover:bg-blue-900' label='save' type='submit' />
                         <Link href='/galeria'>
-                            <Button style='bg-white text-gray-900 border border-red-500 hover:bg-red-500 hover:text-white' label='cancel' type='button' />
+                            <Button style='bg-white border border-red-500 hover:text-white hover:bg-red-500 text-gray-900' label='cancel' type='button' />
                         </Link>
                     </div>
                 </form>
             </section>            
         </Template>
-    )
-    
+    )    
 }
