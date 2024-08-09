@@ -5,14 +5,11 @@ import Link from 'next/link'
 import { useFormik } from 'formik'
 import { useState } from 'react';
 import { useImageService } from '@/resources/image/image.service'
+import { FormProps, formScheme, formValidationScheme } from './formScheme'
 
-interface FormProps{
-    name: string;
-    tags: string;
-    file: any;
-}
 
-const formScheme: FormProps = {name: '', tags: '', file: ''}
+
+
 
 export default function Formulario(){
 
@@ -23,7 +20,8 @@ export default function Formulario(){
 
     const formik = useFormik<FormProps>({
         initialValues: formScheme,
-        onSubmit: handleSubmit
+        onSubmit: handleSubmit,
+        validationSchema: formValidationScheme
     })
 
     async function handleSubmit(dados: FormProps){
@@ -59,11 +57,13 @@ export default function Formulario(){
                     <div className='grid grid-cols-1'>
                         <label className='block text-sm font-medium leading-6 text-gray-600'>Name: *</label>
                         <InputText id="name" onChange={formik.handleChange} placeholder="type the image's name" value={formik.values.name} />
+                        <span className='text-red-600'>{ formik.errors.name }</span>
                     </div>
 
                     <div className='mt-5 grid grid-cols-1'>
                         <label className='block text-sm font-medium leading-6 text-gray-600'>Tags: *</label>
                         <InputText id='tags' onChange={formik.handleChange} placeholder="type the tags comma separated" value={formik.values.tags} />
+                        <span className='text-red-600'>{ formik.errors.tags }</span>
                     </div>
 
                     <div className='mt-5 grid grid-cols-1'>
