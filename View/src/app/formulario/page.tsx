@@ -1,6 +1,6 @@
 'use client'
 
-import { InputText, Template, Button, RenderIf, useNotification } from '@/components'
+import { InputText, Template, Button, RenderIf, useNotification, FieldError } from '@/components'
 import Link from 'next/link'
 import { useFormik } from 'formik'
 import { useState } from 'react';
@@ -57,18 +57,18 @@ export default function Formulario(){
                     <div className='grid grid-cols-1'>
                         <label className='block text-sm font-medium leading-6 text-gray-600'>Name: *</label>
                         <InputText id="name" onChange={formik.handleChange} placeholder="type the image's name" value={formik.values.name} />
-                        <span className='text-red-600'>{ formik.errors.name }</span>
+                        <FieldError error={formik.errors.name} />
                     </div>
 
                     <div className='mt-5 grid grid-cols-1'>
                         <label className='block text-sm font-medium leading-6 text-gray-600'>Tags: *</label>
                         <InputText id='tags' onChange={formik.handleChange} placeholder="type the tags comma separated" value={formik.values.tags} />
-                        <span className='text-red-600'>{ formik.errors.tags }</span>
+                        <FieldError error={formik.errors.tags} />
                     </div>
 
                     <div className='mt-5 grid grid-cols-1'>
                         <label className='block text-sm font-medium leading-6 text-gray-600'>Image: *</label>
-                        <span className='text-red-600'>{ formik.errors.file }</span>
+                        <FieldError error={formik.errors.file} />
                         <div className='mt-2 flex justify-center rounded-lg  border border-dashed border-gray-900/25 px-6 py-10'>
                             <div className='text-center'>
 
