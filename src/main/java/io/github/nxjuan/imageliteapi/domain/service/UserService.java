@@ -8,5 +8,5 @@ public interface UserService {
 
     User save(User user);
 
-    AccessToken autenticate(String email, String password);
+    AccessToken authenticate(String email, String password);
 }
