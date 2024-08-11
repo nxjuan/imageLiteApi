@@ -37,7 +37,7 @@ public class UserController {
     @PostMapping("/auth")
     public ResponseEntity authenticate(@RequestBody CredentialsDTO credentials){
         var token = userService.authenticate(credentials.getEmail(), credentials.getPassword());
-        
+
         if(token == null){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

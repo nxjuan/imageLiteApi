@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AccessToken autenticate(String email, String password) {
+    public AccessToken authenticate(String email, String password) {
         var user = getByEmail(email);
         if(user == null){
             return null;
