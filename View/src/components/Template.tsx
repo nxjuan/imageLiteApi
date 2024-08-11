@@ -29,7 +29,7 @@ export const Template: React.FC<TempleteProps> = ({ children, loading = false }:
 
 interface RenderIfProps{
     condition?: boolean;
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export const RenderIf: React.FC<RenderIfProps> = ({ condition = true, children }) => {
