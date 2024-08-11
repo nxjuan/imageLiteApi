@@ -6,10 +6,11 @@ interface InputTextProps{
     placeholder?: string;
     id?: string;
     value?: string;
+    type?: string;
 }
 
-export const InputText: React.FC<InputTextProps> = ( {style, ...rest}: InputTextProps ) => {
+export const InputText: React.FC<InputTextProps> = ( {style, type = "text", ...rest}: InputTextProps ) => {
     return (
-        <input type="text" className={`${style} border bg-gray-200 px-3 py-2 rounded-md text-black`} {...rest} />
+        <input type={type} className={`${style} border bg-gray-200 px-3 py-2 rounded-md text-black`} {...rest} />
     )
 }
