@@ -1,23 +1,25 @@
 'use client'
 
-import { Template, RenderIf, InputText } from '@/components'
+import { Template, RenderIf, InputText, Button } from '@/components'
 import { useState } from 'react';
 
 export default function Login(){
 
     const [loading, setLoading] = useState<boolean>(false);
-    const [newUserState, setNewUserState] = useState<boolean>(true);
+    const [newUserState, setNewUserState] = useState<boolean>(false);
 
     return (
         <Template loading={loading}>
 
-            <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8'>
+            <div className='flex min-h-full flex-1 flex-col justify-center px-6 py-1 lg:px-8'>
                 <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-                    <h2 className='mt-10 text-center text-1x1 font-bold leading-9 tracking-tight text-gray-600'>Login to you account</h2>
+                    <h2 className='mt-10 text-center text-1x1 font-bold leading-9 tracking-tight text-gray-600'>
+                        {newUserState ? 'Create account' : 'Login to your account'}
+                    </h2>
                 </div>
             </div>
 
-            <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
+            <div className='mt-5 sm:mx-auto sm:w-full sm:max-w-sm'>
                 <form className='space-y-6'>
 
                     <RenderIf condition={newUserState}>
@@ -51,6 +53,18 @@ export default function Login(){
                             <InputText style='w-full' id='password' type='passwordMatch' />
                         </div>   
                     </RenderIf>
+
+                    <div>
+                        <RenderIf condition={newUserState}>
+                            <Button type='submit' style='bg-indigo-600 hover:bg-indigo-900' label='Save' />
+                            <Button type='button' style='mx-5 bg-white border border-cyan-600 hover:text-white hover:bg-cyan-600 text-gray-900 ' label='Back to login' onclick={event => setNewUserState(false)} />
+                        </RenderIf>
+
+                        <RenderIf condition={!newUserState}>
+                            <Button type='submit' style='bg-indigo-600 hover:bg-indigo-900' label='Login' />
+                            <Button type='button' style='mx-5 bg-white border border-cyan-600 hover:text-white hover:bg-cyan-600 text-gray-900 ' label='Sign up' onclick={event => setNewUserState(true)}/>
+                        </RenderIf>
+                    </div>
 
                 </form>
             </div>
