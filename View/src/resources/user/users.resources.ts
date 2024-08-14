@@ -1,7 +1,7 @@
 export class User {
     name?: string;
     email?: string;
-    passwors?: string;
+    password?: string;
 }
 
 export class Credentials{
