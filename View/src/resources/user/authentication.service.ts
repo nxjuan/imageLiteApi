@@ -1,7 +1,7 @@
 import { AccessToken, Credentials, User, UserSessionToken } from './users.resources'
 
 class AuthService {
-    baseUrl: string = "https://localhost:8080/v1/users";
+    baseUrl: string = "http://localhost:8080/v1/users";
     static AUTH_PARAM: string = "_auth";
 
     async authenticate(credentials: Credentials) : Promise<AccessToken> {
