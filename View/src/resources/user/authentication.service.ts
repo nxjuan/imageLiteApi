@@ -44,6 +44,7 @@ class AuthService {
         if(token.accessToken){
             const decodedToken: any = jwt(token.accessToken);
             console.log('DECODED TOKEN ', decodedToken);
+            console.log("date", new Date(decodedToken.expiration))
 
             const userSessionToken: UserSessionToken = {
                 accessToken: token.accessToken,
@@ -58,6 +59,31 @@ class AuthService {
     
     setUserSession(userSessionToken: UserSessionToken){
         localStorage.setItem(AuthService.AUTH_PARAM, JSON.stringify(userSessionToken))
+    }
+
+    getUserSession() : UserSessionToken | null {
+        const authString = localStorage.getItem(AuthService.AUTH_PARAM);
+        if(!authString){
+            return null
+        }
+
+        const token : UserSessionToken = JSON.parse(authString);
+        return token;
+    }
+
+    isSessionValid() : boolean {
+        const userSession: UserSessionToken | null = this.getUserSession();
+        if(!userSession){
+            return false;
+        }
+
+        const expiration: number | undefined = userSession.expiration;
+        if(expiration){
+            const expirationDateInMilis = new Date(expiration * 1000);
+            console.log("Data expiração-----", expirationDateInMilis);
+        }
+
+        return true;
     }
 
 }
