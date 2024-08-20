@@ -43,7 +43,6 @@ class AuthService {
     initSession(token: AccessToken){
         if(token.accessToken){
             const decodedToken: any = jwt(token.accessToken);
-            console.log('DECODED TOKEN ', decodedToken);
 
             const userSessionToken: UserSessionToken = {
                 accessToken: token.accessToken,
@@ -80,7 +79,7 @@ class AuthService {
         const expiration: number | undefined = userSession.expiration;
         if(expiration){
             const expirationDateInMilis = expiration * 1000;
-            console.log("Data expiração-----", new Date(expirationDateInMilis));
+            return new Date() < new Date(expirationDateInMilis);
         }
 
         return true;
