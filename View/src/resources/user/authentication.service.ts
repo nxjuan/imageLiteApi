@@ -29,7 +29,7 @@ class AuthService {
             headers: {
                 "Content-Type" : "application/json"
             }
-        })
+        });
 
         console.log("Response Auth.save: ", response)
 
@@ -44,13 +44,12 @@ class AuthService {
         if(token.accessToken){
             const decodedToken: any = jwt(token.accessToken);
             console.log('DECODED TOKEN ', decodedToken);
-            console.log("date", new Date(decodedToken.expiration))
 
             const userSessionToken: UserSessionToken = {
                 accessToken: token.accessToken,
                 email: decodedToken.sub,
                 name: decodedToken.name,
-                expiration: decodedToken.expiration
+                expiration: decodedToken.exp
             }
 
             this.setUserSession(userSessionToken);
@@ -72,6 +71,7 @@ class AuthService {
     }
 
     isSessionValid() : boolean {
+        
         const userSession: UserSessionToken | null = this.getUserSession();
         if(!userSession){
             return false;
@@ -79,8 +79,8 @@ class AuthService {
 
         const expiration: number | undefined = userSession.expiration;
         if(expiration){
-            const expirationDateInMilis = new Date(expiration * 1000);
-            console.log("Data expiração-----", expirationDateInMilis);
+            const expirationDateInMilis = expiration * 1000;
+            console.log("Data expiração-----", new Date(expirationDateInMilis));
         }
 
         return true;
