@@ -5,6 +5,7 @@ import io.github.nxjuan.imageliteapi.config.filter.JwtFilter;
 import io.github.nxjuan.imageliteapi.domain.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -37,6 +38,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configure(http))
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/v1/users/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/v1/images/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
