@@ -1,6 +1,7 @@
 import {  ToastContainer } from "react-toastify"
 import { useAuth } from '@/resources'
 import Link from 'next/link'
+import { useRouter } from "next/navigation";
 
 interface TempleteProps {
     children: React.ReactNode;
@@ -53,9 +54,11 @@ const Loading: React.FC = () => {
 const Header: React.FC = () => {
 
     const auth = useAuth();
+    const router = useRouter();
 
     function logOut(){
-
+        auth.invalidateSession()
+        router.push("/login");
     }
 
     return (
