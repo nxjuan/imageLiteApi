@@ -1,5 +1,5 @@
-import { Children } from "react";
 import {  ToastContainer } from "react-toastify"
+import { useAuth } from '@/resources'
 import Link from 'next/link'
 
 interface TempleteProps {
@@ -51,12 +51,22 @@ const Loading: React.FC = () => {
 }
 
 const Header: React.FC = () => {
+
+    const auth = useAuth();
+
     return (
         <header className="bg-indigo-950 text-white py-3" >
             <div className="container mx-auto flex justify-between items-center px-4">
                 <Link href='/galeria'>
                     <h1 className="text-3x1 font-bold">ImageLite</h1>
-                </Link>                    
+                </Link>     
+                <div className="flex items-center">
+                    <div className="relative">
+                        <span>
+                            Olá, {auth.getUserSession()?.name}
+                        </span>
+                    </div>
+                </div>               
             </div>
         </header>
     )
