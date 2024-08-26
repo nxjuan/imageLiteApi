@@ -54,19 +54,34 @@ const Header: React.FC = () => {
 
     const auth = useAuth();
 
+    function logOut(){
+
+    }
+
     return (
         <header className="bg-indigo-950 text-white py-3" >
             <div className="container mx-auto flex justify-between items-center px-4">
                 <Link href='/galeria'>
                     <h1 className="text-3x1 font-bold">ImageLite</h1>
-                </Link>     
-                <div className="flex items-center">
-                    <div className="relative">
-                        <span>
-                            Olá, {auth.getUserSession()?.name}
-                        </span>
+                </Link> 
+
+                <RenderIf condition={!!auth.getUserSession()}>    
+                    <div className="flex items-center">
+                        <div className="relative">              
+                            
+                                <span>
+                                    Olá, {auth.getUserSession()?.name}
+                                </span>
+
+                            <span className="w-64 py-3 px-10 text-md">
+                                <a href="#" onClick={logOut}>
+                                    Sair
+                                </a>
+                            </span>
+                        </div>
                     </div>
-                </div>               
+                </RenderIf>   
+
             </div>
         </header>
     )
