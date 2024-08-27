@@ -76,7 +76,7 @@ const Header: React.FC = () => {
                                     Olá, {auth.getUserSession()?.name}
                                 </span>
 
-                            <span className="w-64 py-3 px-10 text-md">
+                            <span className="w-64 py-3 px-10 text-md text-yellow-200 hover:text-yellow-500">
                                 <a href="#" onClick={logOut}>
                                     Sair
                                 </a>
